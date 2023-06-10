@@ -9,3 +9,11 @@
   background-color: #494949;
   width: 100vw;
 }
+
+button {
+  font-weight: bold;
+}
+
+button:hover {
+  text-decoration-line: underline;
+}
