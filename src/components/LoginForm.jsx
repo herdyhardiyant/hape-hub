@@ -1,28 +1,42 @@
 import CenterItemOverlay from "./CenterItemOverlay";
+import { useState } from "react";
 
 function LoginForm() {
+    
+    const [isLoginOpen, setIsLoginOpen] = useState(true)
+    const onLoginBackdropClick = () => { 
+        setIsLoginOpen(false)
+        console.log('onLoginBackdropClick')
+    }
+
+    const onCancelButtonClick = (event) => { 
+        event.preventDefault()
+        setIsLoginOpen(false)
+    }
+    
     return ( 
-        <CenterItemOverlay>
-              <form className='bg-stone-800 w-64 h-64 p-4 rounded-lg'>
+            <CenterItemOverlay isShown={isLoginOpen} onBackdropClick={onLoginBackdropClick}>
+              <form className="flex flex-col ">
                     <h3 className="text-xl">Login</h3>
                     <br />
                     <label>
                         Username:
-                        <input type="email" />
+                        <input type="text" />
                     </label>
                     
                     <label>
                         Password:
-                        <input type='password' />
+                        <input type='password'/>
                     </label>
                     <div className='flex flex-row justify-between
                     mt-2'>
-                        <button>cancel</button>
+                        <button onClick={onCancelButtonClick}>cancel</button>
                         <button>submit</button>
                     </div>
                 </form>
-        </CenterItemOverlay>
+            </CenterItemOverlay>
      );
 }
+
 
 export default LoginForm;

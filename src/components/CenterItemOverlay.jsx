@@ -1,13 +1,16 @@
-function CenterItemOverlay({children}) {
-    return (
-        <>
-            <div className=' fixed bg-black opacity-70 w-screen h-screen z-10 top-0 left-0'>
 
+
+function CenterItemOverlay({ children, isShown, onBackdropClick }) {
+
+    return isShown && (
+        <>
+            <div className=' flex justify-center items-center fixed bg-black opacity-70 w-screen h-screen z-10 top-0 left-0' onClick={onBackdropClick} >
             </div>
-            <div className='fixed flex justify-center items-center w-screen h-screen z-20 top-0 left-0'>
-              {children}
-            </div>
+            <dialog className=' text-white flex flex-col justify-center items-center z-20 h-64 w-64 rounded-lg bg-stone-800'>
+                {children}
+            </dialog>
         </>
+
     );
 }
 
