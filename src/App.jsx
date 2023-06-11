@@ -7,6 +7,15 @@ import CenterItemOverlay from './components/CenterItemOverlay'
 
 function App() {
 
+  const [isLoginOpen, setIsLoginOpen] = useState(true)
+
+  const onLoginClick = () => { 
+    setIsLoginOpen(true)
+  }
+
+  const onLoginClose = () => { 
+    setIsLoginOpen(false)
+  }
 
   return (
 
@@ -14,8 +23,10 @@ function App() {
 
     <>
 
-      <Navbar />
-      <LoginForm />
+      <Navbar onLoginClick={onLoginClick}/>
+      <LoginForm isLoginOpen={isLoginOpen} onClose={onLoginClose}/>
+     
+      
 
       <br />
 

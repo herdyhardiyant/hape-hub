@@ -1,18 +1,17 @@
 import CenterItemOverlay from "./CenterItemOverlay";
 import { useState } from "react";
 
-function LoginForm() {
+function LoginForm({isLoginOpen, onClose}) {
     
-    const [isLoginOpen, setIsLoginOpen] = useState(true)
     const onLoginBackdropClick = () => { 
-        setIsLoginOpen(false)
-        console.log('onLoginBackdropClick')
+        onClose()
     }
 
     const onCancelButtonClick = (event) => { 
         event.preventDefault()
-        setIsLoginOpen(false)
+        onClose()
     }
+    
     
     return ( 
             <CenterItemOverlay isShown={isLoginOpen} onBackdropClick={onLoginBackdropClick}>
