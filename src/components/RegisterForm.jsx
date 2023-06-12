@@ -2,7 +2,7 @@
 import { useState } from "react";
 import CenterItemOverlay from "./CenterItemOverlay"
 
-function RegisterForm({onClose, isRegisterOpen}) {
+function RegisterForm({onClose, isRegisterOpen, onSuccessfulRegister}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -27,6 +27,15 @@ function RegisterForm({onClose, isRegisterOpen}) {
         event.preventDefault()
         onClose()
     }
+
+    const onRegister = () => {
+        onClose()
+
+        //TODO - call the API to register
+        // if successful, call onSuccessfulRegister()
+        onSuccessfulRegister()
+    }
+
     return ( 
         <CenterItemOverlay isShown={isRegisterOpen} onBackdropClick={onBackdropClick}>
               <form className="flex flex-col ">
@@ -48,7 +57,7 @@ function RegisterForm({onClose, isRegisterOpen}) {
                     <div className='flex flex-row justify-between
                     mt-2'>
                         <button onClick={onCancelButtonClick}>cancel</button>
-                        <button>submit</button>
+                        <button onClick={ (event) => {event.preventDefault(); onRegister()} }>submit</button>
                     </div>
                 </form>
             </CenterItemOverlay>

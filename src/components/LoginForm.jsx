@@ -1,7 +1,7 @@
 import CenterItemOverlay from "./CenterItemOverlay";
 import { useState } from "react";
 
-function LoginForm({isLoginOpen, onClose}) {
+function LoginForm({isLoginOpen, onClose, onSuccessfulLogin}) {
     
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -23,6 +23,14 @@ function LoginForm({isLoginOpen, onClose}) {
     const onPasswordChange = (event) => { 
         setPassword(event.target.value)
     }
+
+    const onLogin = () => {
+        onClose()
+
+        //TODO - call the API to login
+        // if successful, call onSuccessfulLogin()
+        onSuccessfulLogin()
+    }
     
     
     return ( 
@@ -42,7 +50,7 @@ function LoginForm({isLoginOpen, onClose}) {
                     <div className='flex flex-row justify-between
                     mt-2'>
                         <button onClick={onCancelButtonClick}>cancel</button>
-                        <button>submit</button>
+                        <button onClick={(event) => {event.preventDefault(); onLogin() }}>submit</button>
                     </div>
                 </form>
             </CenterItemOverlay>

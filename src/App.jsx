@@ -4,33 +4,41 @@ import LoginForm from './components/LoginForm'
 import { useState } from 'react'
 import RegisterForm from './components/RegisterForm'
 
-function App() {
 
-  const [isLoginOpen, setIsLoginOpen] = useState(false)
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false)
+function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+  const [isLoginOverlayOpen, setIsLoginOverlayOpen] = useState(false)
+  const [isRegisterOverlayOpen, setIsRegisterOverlayOpen] = useState(false)
 
   const onLoginClick = () => { 
-    setIsLoginOpen(true)
+    setIsLoginOverlayOpen(true)
   }
 
   const onLoginClose = () => { 
-    setIsLoginOpen(false)
+    setIsLoginOverlayOpen(false)
   }
 
   const onRegisterClick = () => { 
-    setIsRegisterOpen(true)
+    setIsRegisterOverlayOpen(true)
   }
 
   const onRegisterClose = () => { 
-    setIsRegisterOpen(false)
+    setIsRegisterOverlayOpen(false)
   } 
+
+  const onAuthenticated = () => {
+    setIsUserLoggedIn(true)
+  }
+  
+  const onLogout = () => {
+    setIsUserLoggedIn(false)
+  }
 
   return (
     <>
-
-      <Navbar onLoginClick={onLoginClick} onRegisterClick={onRegisterClick}/>
-      <LoginForm isLoginOpen={isLoginOpen} onClose={onLoginClose}/>
-      <RegisterForm isRegisterOpen={isRegisterOpen} onClose={onRegisterClose}/>
+      <Navbar onLogout={onLogout} onLoginClick={onLoginClick} onRegisterClick={onRegisterClick} isUserLoggedIn={isUserLoggedIn}/>
+      <LoginForm onSuccessfulLogin={onAuthenticated} isLoginOpen={isLoginOverlayOpen} onClose={onLoginClose}/>
+      <RegisterForm onSuccessfulRegister={onAuthenticated} isRegisterOpen={isRegisterOverlayOpen} onClose={onRegisterClose}/>
       <br />
 
       <PhoneList />
