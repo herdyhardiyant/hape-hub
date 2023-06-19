@@ -8,6 +8,7 @@
   margin: 0 0 0 0;
   background-color: #494949;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 button {

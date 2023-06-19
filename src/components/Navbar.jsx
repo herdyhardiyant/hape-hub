@@ -1,16 +1,9 @@
 import { useState } from 'react';
-function Navbar({ onLoginClick, onRegisterClick, isUserLoggedIn, onLogout }) {
-
-    const [isCartOpen, setIsCartOpen] = useState(false)
-
-    const onOpenCart = () => {
-        //TODO - open the cart
-        alert('Your cart is empty')
-    }
-
+function Navbar({ onLoginClick, onRegisterClick, isUserLoggedIn, onLogout, onOpenCart }) {
+   
     return (
         <>
-        <div className='flex flex-row items-center justify-between align-middle bg-stone-800 p-4 px-6 h-20 shadow-lg'>
+        <div className='flex flex-row items-center justify-between align-middle bg-stone-800 p-4 pr-10 px-6 h-20 shadow-lg'>
             <h1 className='text-4xl '>Hape Hub_@</h1>
             {
                 isUserLoggedIn 
