@@ -1,20 +1,34 @@
 import CenterItemOverlay from "../CenterItemOverlay";
 import PhoneItem from "./PhoneItem";
-import { useState } from 'react';
-
-function PhoneList({isUserLoggedIn, isShown}) {
+import { useState, useEffect } from 'react';
+function PhoneList({ isUserLoggedIn, isShown, onListItemClick }) {
+  const [products, setProducts] = useState([]);
   const [isPhoneAddedOverlayOpen, setIsPhoneAddedOverlayOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products/category/electronics');
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  //TODO - fetch phones from the server
+    fetchData();
+  }, []);
 
-  const onPhoneClick = () => {
-    
-    setIsPhoneAddedOverlayOpen(true); 
+
+  const onPhoneClick = (name, price, id) => {
+    if (isUserLoggedIn === false) return;
+
+    onListItemClick(name, price, id)
+    setIsPhoneAddedOverlayOpen(true);
   }
 
   const onPhoneAddedOverlayClose = () => {
-    setIsPhoneAddedOverlayOpen(false);  
+    setIsPhoneAddedOverlayOpen(false);
   }
 
   return isShown && (
@@ -27,18 +41,20 @@ function PhoneList({isUserLoggedIn, isShown}) {
 
       {
         isUserLoggedIn &&
-      <h1 className="text-xl">Hello There... Available phones for you.</h1>
-        
+        <h1 className="text-xl">Hello There... Available phones for you.</h1>
+
       }
 
       <br />
       <div className='flex flex-row flex-wrap gap-4'>
-
-        <PhoneItem onClick={onPhoneClick} />
-        <PhoneItem onClick={onPhoneClick}/>
-        <PhoneItem onClick={onPhoneClick}/>
-        <PhoneItem onClick={onPhoneClick}/>
-
+        {
+          products.map((item) => {
+            return (
+              <PhoneItem key={item.id} id={item.id} name={item.name} price={item.price} image={item.image} onClick={onPhoneClick} />
+            )
+          }
+          )
+        }
 
       </div>
     </div>

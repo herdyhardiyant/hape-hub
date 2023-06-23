@@ -1,17 +1,23 @@
-const phoneDummy = 'https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/apple/Apple-iPhone-12/Black/Apple-iPhone-12-Black-thumbnail.png'
 
-function PhoneItem({onClick}) {
+function PhoneItem({name, price,image, onClick, id}) {
 
-
+  const formattedPrice = price.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+  
+  const onItemClick = () => {
+    onClick(name, price, id)
+  }
 
   //TODO - on click, add the phone to the cart
     return (  
-
-        <div onClick={onClick} className='flex flex-col cursor-pointer hover:scale-105 ease-in-out duration-150 relative justify-between bg-stone-800 w-64 h-64 p-4 rounded-lg shadow-lg '>
-          <img className='object-contain w-full h-2/3 ' src={phoneDummy} alt="Phone dummy" />
+        
+        <div onClick={onItemClick} className='flex flex-col cursor-pointer hover:scale-105 ease-in-out duration-150 relative justify-between bg-stone-800 w-64 h-64 p-4 rounded-lg shadow-lg '>
+      <img className='object-contain w-full h-2/3 ' src={image} alt={`${name} Photo `} />
           <div>
-            <h3>Phone Name #1113</h3>
-            <p>Price: $1000</p>
+            <h3>{name}</h3>
+            <p>{formattedPrice}</p>
           </div>
       
         </div>

@@ -8,6 +8,11 @@ import Cart from './components/Cart/Cart'
 
 
 function App() {
+
+  //TODOs
+  //1 - Login and Register forms
+  //2 - Cart save to the database with the user
+
   //User States
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
@@ -19,6 +24,8 @@ function App() {
   const [isRegisterOverlayOpen, setIsRegisterOverlayOpen] = useState(false)
   const [isWelcomeOverlayOpen, setIsWelcomeOverlayOpen] = useState(false)
   const [isLogoutOverlayOpen, setIsLogoutOverlayOpen] = useState(false)
+
+  const [cartList, setCartList] = useState([])
 
 
   const onLoginClick = () => {
@@ -64,6 +71,11 @@ function App() {
     setIsCartOpen(false)
   }
 
+  const onPhoneItemClick = (name, price, id) => {
+    setCartList((prev) => [...prev, { id, name, price }])
+
+  }
+
   return (
     <>
       <Navbar onLogout={onLogout} onLoginClick={onLoginClick} onRegisterClick={onRegisterClick} isUserLoggedIn={isUserLoggedIn} onOpenCart={onOpenCart} />
@@ -83,10 +95,10 @@ function App() {
       </CenterItemOverlay>
 
 
-      <Cart isLoggedIn={isUserLoggedIn} isOpen={isCartOpen} onCloseCart={onCloseCart}/>
+      <Cart isLoggedIn={isUserLoggedIn} isOpen={isCartOpen} onCloseCart={onCloseCart} cartList={cartList} />
 
 
-      <PhoneList isUserLoggedIn={isUserLoggedIn} isShown={!isCartOpen} />
+      <PhoneList isUserLoggedIn={isUserLoggedIn} isShown={!isCartOpen} onListItemClick={onPhoneItemClick} />
 
     </>
   )
