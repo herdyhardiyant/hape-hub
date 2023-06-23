@@ -50,7 +50,7 @@ function PhoneList({ isUserLoggedIn, isShown, onListItemClick }) {
         {
           products.map((item) => {
             return (
-              <PhoneItem key={item.id} id={item.id} name={item.name} price={item.price} image={item.image} onClick={onPhoneClick} />
+              <PhoneItem key={item.id} id={item.id} name={item.title} price={item.price} image={item.image} onClick={onPhoneClick} />
             )
           }
           )

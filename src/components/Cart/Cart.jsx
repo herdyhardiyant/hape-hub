@@ -43,7 +43,7 @@ function Cart({ isLoggedIn, isOpen, onCloseCart, cartList }) {
                         :
                         products.map((item) => {
                             return (
-                                <CartItem key={item.id + Math.random()} name={item.name} image={item.image} price={item.price} />
+                                <CartItem key={item.id + Math.random()} name={item.title} image={item.image} price={item.price} />
                             )
                         }
                         )
