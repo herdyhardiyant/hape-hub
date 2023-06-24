@@ -28,6 +28,8 @@ HAPE HUB adalah sebuah aplikasi web toko handphone online
 
 1. Jalankan `npm run dev` untuk menjalankan development server.
 2. Buka `http://localhost:3000` untuk melihat aplikasi web ini.
+3. Clone dan instal [backend API](https://github.com/herdyhardiyant/hape-hub-backend).
+4. Jalankan Web Server untuk backend API. `http://localhost/hape-hub-backend/api.php`
 
 ## License
 

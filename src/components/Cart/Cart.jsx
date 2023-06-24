@@ -2,29 +2,15 @@ import CartItem from "./CartItem";
 
 import { useState, useEffect } from 'react';
 
-function Cart({ isLoggedIn, isOpen, onCloseCart, cartList }) {
-    const [products, setProduct] = useState([]);
+function Cart({ isLoggedIn, isOpen, onCloseCart, cartList, onRemoveCartItem }) {
+
     const isCartOpen = isLoggedIn && isOpen;
 
     //TODO : Delete item
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = cartList.map(async (item) => {
-                    const response = await fetch(`http://localhost/hape-hub-backend/api.php?id=${item.id}`);
-                    return await response.json();
-                });
-                const products = await Promise.all(data);
-                setProduct(products);
 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, [cartList]);
+    const onRemove = (uniqueKey) => {
+        onRemoveCartItem(uniqueKey);
+    }
 
     return isCartOpen && (
         <div className="w-full p-8 overflow-clip">
@@ -40,9 +26,9 @@ function Cart({ isLoggedIn, isOpen, onCloseCart, cartList }) {
 
                     cartList.length === 0 ? <h1 className="text-xl">Your cart is empty</h1>
                         :
-                        products.map((item) => {
+                        cartList.map((item) => {
                             return (
-                                <CartItem key={item.id + Math.random()} name={item.title} image={item.image} price={item.price} />
+                                <CartItem key={item.uniqueKey} uniqueKey={item.uniqueKey} name={item.title} image={item.image} price={item.price} onRemoveCartItem={onRemove} />
                             )
                         }
                         )

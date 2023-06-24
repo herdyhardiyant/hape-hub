@@ -7,7 +7,7 @@ function PhoneItem({ name, price, image, onClick, id }) {
   });
 
   const onItemClick = () => {
-    onClick(name, price, id)
+    onClick(id, name, price, image)
   }
 
   //TODO - on click, add the phone to the cart

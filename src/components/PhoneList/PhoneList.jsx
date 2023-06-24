@@ -20,11 +20,13 @@ function PhoneList({ isUserLoggedIn, isShown, onListItemClick }) {
   }, []);
 
 
-  const onPhoneClick = (name, price, id) => {
+  const onPhoneClick = (id, title, price, image) => {
+
+    setIsPhoneAddedOverlayOpen(true);
+
     if (isUserLoggedIn === false) return;
 
-    onListItemClick(name, price, id)
-    setIsPhoneAddedOverlayOpen(true);
+    onListItemClick(id, title, price, image)
   }
 
   const onPhoneAddedOverlayClose = () => {
@@ -35,7 +37,12 @@ function PhoneList({ isUserLoggedIn, isShown, onListItemClick }) {
     <div className="w-full p-8 overflow-clip">
 
       <CenterItemOverlay isShown={isPhoneAddedOverlayOpen} onBackdropClick={onPhoneAddedOverlayClose}>
+        {
+          isUserLoggedIn ? 
         <h1 className="text-xl">You add this phone to cart</h1>
+        :
+        <h1 className="text-xl">You need to login first</h1>
+        }
         <button onClick={onPhoneAddedOverlayClose}>Close</button>
       </CenterItemOverlay>
 

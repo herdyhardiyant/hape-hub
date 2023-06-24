@@ -71,10 +71,15 @@ function App() {
     setIsCartOpen(false)
   }
 
-  const onPhoneItemClick = (name, price, id) => {
-    setCartList((prev) => [...prev, { id, name, price }])
-
+  const onPhoneItemClick = (id, title, price, image) => {
+    let uniqueKey = id + Math.random() + Date.now()
+    setCartList((prev) => [...prev, {  uniqueKey, id, title, price, image }])
   }
+
+  const onRemoveCartItem = (uniqueKey) => {
+    setCartList((prev) => prev.filter((item) => item.uniqueKey !== uniqueKey))
+  }
+
 
   return (
     <>
@@ -95,7 +100,7 @@ function App() {
       </CenterItemOverlay>
 
 
-      <Cart isLoggedIn={isUserLoggedIn} isOpen={isCartOpen} onCloseCart={onCloseCart} cartList={cartList} />
+      <Cart isLoggedIn={isUserLoggedIn} isOpen={isCartOpen} onCloseCart={onCloseCart} cartList={cartList} onRemoveCartItem={onRemoveCartItem} />
 
 
       <PhoneList isUserLoggedIn={isUserLoggedIn} isShown={!isCartOpen} onListItemClick={onPhoneItemClick} />
