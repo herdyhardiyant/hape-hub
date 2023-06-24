@@ -6,14 +6,13 @@ function Cart({ isLoggedIn, isOpen, onCloseCart, cartList }) {
     const [products, setProduct] = useState([]);
     const isCartOpen = isLoggedIn && isOpen;
 
-    //TODO : dont use this, we already have the data in the cartList
     //TODO : Delete item
     
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = cartList.map(async (item) => {
-                    const response = await fetch(`https://fakestoreapi.com/products/${item.id}`);
+                    const response = await fetch(`http://localhost/hape-hub-backend/api.php?id=${item.id}`);
                     return await response.json();
                 });
                 const products = await Promise.all(data);
